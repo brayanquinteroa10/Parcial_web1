@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebDeveloper</title>
+<style>
+body {
+    background-color: #e8ecef;
+}
+
+.titulo{
+    font-family: bahnschrift light;
+    text-align: center;
+}
+
+.form-register {
+    width: 400px;
+    background: white;
+    padding: 30px;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 10px;
+    font-family: 'calibri';
+    color:#424949; 
+    text-align: center;
+    box-shadow: 0px 0px 10px 1px rgba(150,150,150)
+}
+
+.form-register-int {
+    width: 400px;
+    margin: auto;
+}
+
+.form-register h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-weight: normal;
+      margin-top: -10px;
+}
+
+.controls{
+    width: 360px;
+    background: white;
+    padding: 10px;
+    padding-right: 30px;
+    border-radius: 8px;
+    margin: 8px auto;
+    border: 1px solid #424949;
+    font-family: 'calibri';
+    font-size: 18px;
+    color:black;
+}
+
+.controls:active {
+    outline: blue;
+}
+
+.controlsGust2{
+    position: relative;
+    width: 70px;
+    text-align: center;
+    border-radius: 0px 8px 8px 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+    bottom: 60px;
+    left:  166px;
+    cursor: pointer;
+}
+
+.img_flotante{
+    width: 15px;
+    height: 15px;
+    position: relative;
+    z-index: 1;
+    bottom: 38px;
+    left: 185px;
+}
+
+.div-gustos{
+    margin-top: -40px;
+
+}
+
+.tab1{
+    width: 400px;
+
+}
+
+.tab-gustos{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tab-gustos td{
+    border: 1px solid lightgray;
+    padding: 5px 0px;
+}
+
+.bandera{
+    width: 50px;
+    background-color: #218e3b;
+    padding: 5px;
+}
+
+.img_bandera{
+    width: 50px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.form-register p {
+    height: 40px;
+    text-align: left;
+    font-size: 18px;
+    font-family: 'calibri';
+    line-height: 40px;
+
+}
+
+.form-register a {
+    color: blue;
+    text-decoration: none;
+}
+
+.botons {
+    width: 100px;
+    background: blue;
+    border: none;
+    padding: 12px;
+    color: white;
+    margin: 16px 0;
+    font-size: 16px;
+}
+
+.input_tabla{
+    padding: 5px 0px;
+    margin: 0 5px;
+    text-align: center;
+    width: 121px;
+}
+
+.celdaEdicion{
+    color: #0000ff;
+    cursor: pointer;
+    margin: 0 5px;
+    width: 50px;
+}
+
+button{
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.b_aceptar{
+    border-color: #218e3b;
+    background-color: #ffffff;
+    color:  #218e3b;
+}
+
+.b_cancelar{
+    border-color: #ff0000;
+    background-color: #ffffff;
+    color:  #ff0000;
+}
+
+#botones_edicion{
+    margin-top: 10px;
+}
+
+</style>
+
+</head>
+<body>
+    <div class="titulo"><h1><b>Web</b>Developer</h1></div>
+    <section class="form-register">
+        <h4>Formulario de Afiliación</h4>
+            <input class="controls" type="text" name="nombre" id="nombre" placeholder="Nombre completo">
+            <img src="images/user.png" class="img_flotante">
+            <input class="controls" type="email" name="correo" id="correo" placeholder="Email">
+            <img src="images/email.png" class="img_flotante">
+            <input class="controls" type="text" maxlength="10" id="numero" placeholder="Número Teléfono" onkeypress="return soloNumeros(event)">
+            <img src="images/tel.png" class="img_flotante">
+                <!-- Permite que el id de usuario no sea mayor a 11 caracteres numericos -->
+                <script>
+                    var input=  document.getElementById('numero');
+                        input.addEventListener('input',function(){
+                        if (this.value.length > 10) 
+                            this.value = this.value.slice(0,9); 
+                        })
+                </script>
+            <input class="controls controlsGust" type="text" name="gustos" id="input_gustos" placeholder="Ingrese un gusto" id="gustos">
+            <button class="controls controlsGust2" style="background-color:#218e3b;color: white;"  type="text" placeholder="Gustos" onclick="agregarFila()">Gustos</button>
+
+            <div class="div-gustos">
+                <table class="tab1">
+                    <tr>
+                        <td class="bandera">
+                            <img src="images/bandera.png" class="img_bandera">
+                        </td>
+                        <td id="td-tab-gustos">
+                            <table class="tab-gustos" id="tabla_gustos">
+                                <tr>
+                                    <td>
+                                       <b>Gusto</b>
+                                    </td>
+                                    <td>
+                                        <b>%</b>
+                                    </td>
+                                    <td>
+                                        <b>Edit</b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="botones_edicion"></div>
+            <p><a href="#">Ir a Site P web</a></p>
+    </section>
+
+    <script>
+    var nFilas = 0;
+    var editando_fila = false;
+
+    function soloNumeros(evt) {
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+
+    function agregarFila(){
+        var gusto = document.getElementById("input_gustos").value;
+        if (gusto.length == 0){
+            console.log("No se agrega por longitud 0");
+        }else{
+            nFilas += 1;
+            var tabla = document.getElementById("tabla_gustos");
+            var fila = tabla.insertRow(-1);
+            var cel1 = fila.insertCell(0);
+            var cel2 = fila.insertCell(1);
+            var cel3 = fila.insertCell(2);
+            cel1.innerHTML = "<input class=\"input_tabla\" name=\"gusto"+nFilas.toString()+"\" value=\""+gusto+"\" id=\"gusto"+nFilas.toString()+"\"disabled>";
+            cel2.innerHTML = "<input class=\"input_tabla\" name=\"por"+nFilas.toString()+"\" value=\"0\" onkeypress=\"return soloNumeros(event)\" id=\"por"+nFilas.toString()+"\" disabled>";
+            cel3.innerHTML = "<div onclick=\"editarFila('gusto"+nFilas.toString()+"', 'por"+nFilas.toString()+"', 'edita"+nFilas.toString()+"')\" class=\"celdaEdicion\" id=\"edita"+nFilas.toString()+"\">Editar</div>";
+        }
+    }
+
+    function editarFila(in_g, in_p, l_e){
+        if(editando_fila === true){
+            alert("Solo se puede editar una línea.");
+        }else{
+            var input_gusto = document.getElementById(in_g);
+            var input_por = document.getElementById(in_p);
+            var texto_edita = document.getElementById(l_e);
+
+            texto_edita.style.color = "#888888";
+            texto_edita.innerHTML = "En edición";
+            input_gusto.disabled = false;
+            input_por.disabled = false;
+            editando_fila = true;
+
+            document.getElementById("botones_edicion").innerHTML = "            <div id=\"div_aceptar\">Pulse aceptar para guardar los cambios o cancelar para anularlos.<br><button class=\"b_aceptar\" onclick=\"enviarInfo('"+in_g+"', '"+in_p+"')\">Aceptar</button><button class=\"b_cancelar\" onclick=\"cancelarTabla()\">Cancelar</button></div>";
+        }
+    }
+
+    function cancelarTabla(){
+        document.getElementById("td-tab-gustos").innerHTML = "<table class=\"tab-gustos\" id=\"tabla_gustos\"><tr><td><b>Gusto</b></td><td><b>%</b></td><td><b>Edit</b></td></tr></table>";
+        nFilas = 0;
+        editando_fila = false;
+        document.getElementById("botones_edicion").innerHTML = "";
+    }
+
+    function enviarInfo(in_g, in_p){
+        var nombre = document.getElementById("nombre").value;
+        var correo = document.getElementById("correo").value;
+        var numero = document.getElementById("numero").value;
+        var gusto = document.getElementById(in_g).value;
+        var porcentaje = document.getElementById(in_p).value;
+
+        var url = "recibido.html?nombre="+nombre+"&correo="+correo+"&numero="+numero+"&gusto="+gusto+"&porcentaje="+porcentaje.toString();
+        console.log(url);
+        window.location=url;
+        console.log("Ok");
+    }
+</script>
+</body>
+</html>
